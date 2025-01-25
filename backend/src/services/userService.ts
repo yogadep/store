@@ -23,6 +23,10 @@ export class UserService {
   }
 
   async updateUser(id: string, data: Partial<User>) {
+    if (data.password) {
+        data.password = await PasswordService.hashPassword(data.password)
+    }
+     
     return prisma.user.update({
       where: { id },
       data
