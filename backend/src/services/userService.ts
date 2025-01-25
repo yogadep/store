@@ -1,10 +1,18 @@
 // src/services/user.service.ts
 import prisma from '../prisma/client'
 import { User } from '@prisma/client'
+import { PasswordService } from '../utils/password.service'
 
 export class UserService {
   async createUser(data: Omit<User, 'id'>) {
-    return prisma.user.create({ data })
+    const hashedPassword = await PasswordService.hashPassword(data.password)
+
+    return prisma.user.create({ 
+        data: {
+          ...data,
+          password: hashedPassword
+        }
+    })
   }
 
   async getUserById(id: string) {
