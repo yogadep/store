@@ -11,6 +11,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model Product {
@@ -35,7 +36,7 @@ model Profile {
 
 model User {
   id       String    @id @default(uuid())
-  email   String   @unique
+  username   String   @unique
   name    String
   password String
   product   Product[]
