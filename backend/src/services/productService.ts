@@ -8,7 +8,7 @@ export interface ProductData {
 }
 
 export interface ProductResponse {
-  id: number;
+  id: string;
   title: string;
   description: string | null;
   price: number;
@@ -46,14 +46,14 @@ export class ProductService {
     });
   }
 
-  async getProductById(id: number): Promise<ProductResponse | null> {
+  async getProductById(id: string): Promise<ProductResponse | null> {
     // Ambil produk berdasarkan ID
     return prisma.product.findUnique({
       where: { id }
     });
   }
 
-  async updateProduct(id: number, productData: Partial<ProductData>, userId: string): Promise<ProductResponse> {
+  async updateProduct(id: string, productData: Partial<ProductData>, userId: string): Promise<ProductResponse> {
     // Pastikan produk ada dan milik user yang meminta update
     const product = await prisma.product.findFirst({
       where: {
@@ -73,7 +73,7 @@ export class ProductService {
     });
   }
 
-  async deleteProduct(id: number, userId: string): Promise<ProductResponse> {
+  async deleteProduct(id: string, userId: string): Promise<ProductResponse> {
     // Pastikan produk ada dan milik user yang meminta delete
     const product = await prisma.product.findFirst({
       where: {
@@ -92,7 +92,7 @@ export class ProductService {
     });
   }
 
-  async publishProduct(id: number, userId: string): Promise<ProductResponse> {
+  async publishProduct(id: string, userId: string): Promise<ProductResponse> {
     // Pastikan produk ada dan milik user yang meminta publish
     const product = await prisma.product.findFirst({
       where: {
@@ -112,7 +112,7 @@ export class ProductService {
     });
   }
 
-  async unpublishProduct(id: number, userId: string): Promise<ProductResponse> {
+  async unpublishProduct(id: string, userId: string): Promise<ProductResponse> {
     // Pastikan produk ada dan milik user yang meminta unpublish
     const product = await prisma.product.findFirst({
       where: {

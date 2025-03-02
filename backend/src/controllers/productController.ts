@@ -1,6 +1,7 @@
 // src/controllers/product.controller.ts
 import { Request, Response } from 'express';
 import { ProductService } from '../services/productService';
+import validator from 'validator';
 
 const productService = new ProductService();
 
@@ -54,9 +55,9 @@ export class ProductController {
 
   static async getProductById(req: Request, res: Response): Promise<void> {
     try {
-      const id = parseInt(req.params.id);
-      
-      if (isNaN(id)) {
+      const id = req.params.id;
+
+      if (!id || !validator.isUUID(id)) {
         res.status(400).json({ error: 'ID produk tidak valid' });
         return;
       }
@@ -83,13 +84,14 @@ export class ProductController {
         return;
       }
 
-      const id = parseInt(req.params.id);
+      const id = req.params.id;
       
-      if (isNaN(id)) {
+
+     if (!id || !validator.isUUID(id)) {
         res.status(400).json({ error: 'ID produk tidak valid' });
         return;
       }
-
+      
       const { title, description, price, stock } = req.body;
       
       // Validasi input
@@ -130,9 +132,9 @@ export class ProductController {
         return;
       }
 
-      const id = parseInt(req.params.id);
+      const id = req.params.id;
       
-      if (isNaN(id)) {
+      if (!id || !validator.isUUID(id)) {
         res.status(400).json({ error: 'ID produk tidak valid' });
         return;
       }
@@ -157,9 +159,9 @@ export class ProductController {
         return;
       }
 
-      const id = parseInt(req.params.id);
+      const id = req.params.id;
       
-      if (isNaN(id)) {
+      if (!id || !validator.isUUID(id)) {
         res.status(400).json({ error: 'ID produk tidak valid' });
         return;
       }
@@ -184,9 +186,9 @@ export class ProductController {
         return;
       }
 
-      const id = parseInt(req.params.id);
+      const id = req.params.id;
       
-      if (isNaN(id)) {
+      if (!id || !validator.isUUID(id)) {
         res.status(400).json({ error: 'ID produk tidak valid' });
         return;
       }
