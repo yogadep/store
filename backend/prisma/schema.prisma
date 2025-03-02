@@ -15,14 +15,14 @@ datasource db {
 }
 
 model Product {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String   @db.VarChar(255)
-  description   String?
-  price     Int
+  id        String   @id @default(uuid())
+  title     String
+  description String?
+  price     Float
   stock     Int
   published Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   author    User     @relation(fields: [authorId], references: [id])
   authorId  String
 }
